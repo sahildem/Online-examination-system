@@ -1,0 +1,92 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    width: 300px;
+    margin: 50px auto;
+    background-color: white;
+    border-width: 50px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    
+}
+
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+    width: calc(100% - 40px);
+    padding: 15px;
+    margin: 20px 0;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    font-size: 16px;
+    color: #333;
+    transition: border-bottom 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-bottom: 2px solid #6f42c1;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #6f42c1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #512da8;
+}
+
+/* Custom styles for placeholder */
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: #999;
+}
+
+/* Creative effect */
+.form-wrap::after {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, #6f42c1 20%, transparent 50%);
+    top: -100%;
+    left: -100%;
+    transform: rotate(30deg);
+    animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(30deg) translate(-100%, -100%);
+    }
+    100% {
+        transform: rotate(30deg) translate(100%, 100%);
+    }
+}
+
+.img{
+    background-image:url("../img/admin.jpg");
+    background-size: 110%;
+    opacity: 0.7;
+    
+   
+}

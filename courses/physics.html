@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <style>
+        #submit-btn {
+       background-color: red;
+       color: white;
+       padding: 10px 15px;
+       border: none;
+       border-radius: 5px;
+       cursor: pointer;
+       font-size: 16px;
+       transition: background-color 0.3s ease;
+   }
+
+   #submit-btn:hover {
+       background-color: darkred;
+   }
+       body {
+           font-family: 'Arial', sans-serif;
+           margin: 20px;
+           background-color: #f5f5f5;
+       }
+
+       #exam-container {
+
+           max-width: 800px;
+           margin: auto;
+           background-color: #fff;
+           padding: 20px;
+           border-radius: 8px;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+           transition: transform 0.3s ease;
+           position: relative;
+       }
+        #timer {
+            position: absolute;
+            top: 20px;
+            right: 20px;            
+            font-size: 18px;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            background-color:darkslategray ;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+       #exam-container:hover {
+           transform: translateY(-5px);
+       }
+
+       .question {
+           background-color: #f9f9f9;
+           padding: 15px;
+           border-radius: 8px;
+           margin-bottom: 20px;
+           transition: transform 0.3s ease;
+       }
+
+       .question:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       }
+
+       .options {
+           list-style-type: none;
+           padding: 0;
+       }
+
+       .options li {
+           margin-bottom: 10px;
+           transition: background-color 0.3s ease;
+           cursor: pointer;
+       }
+
+       .options li:hover {
+           background-color: #f0f0f0;
+       }
+
+       .options li input[type="radio"] {
+           display: none;
+       }
+
+       .options li label {
+           display: block;
+           padding: 10px 15px;
+           border-radius: 5px;
+           border: 1px solid #ddd;
+           transition: background-color 0.3s ease;
+       }
+
+       .options li input[type="radio"]:checked + label {
+           background-color: #4CAF50;
+           color: white;
+       }
+
+       #review-btn {
+           background-color: #4CAF50;
+           color: white;
+           padding: 10px 15px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           transition: background-color 0.3s ease;
+       }
+
+       #review-btn:hover {
+           background-color: #45a049;
+       }
+
+       .page-navigation {
+           margin-top: 20px;
+           text-align: center;
+       }
+
+       .page-navigation button {
+           background-color: #008CBA;
+           color: white;
+           border: none;
+           padding: 10px 15px;
+           margin-right: 10px;
+           cursor: pointer;
+           border-radius: 5px;
+           transition: background-color 0.3s ease;
+       }
+
+       .page-navigation button:hover {
+           background-color: #0077A3;
+       }
+
+       #progress {
+           margin-top: 10px;
+           text-align: center;
+           font-size: 16px;
+       }
+
+       .progress-bar {
+           height: 20px;
+           margin-top: 10px;
+           border-radius: 5px;
+           overflow: hidden;
+           background-color: #ddd;
+       }
+
+       .progress-bar span {
+           display: block;
+           height: 100%;
+           width: 0;
+           transition: width 0.5s ease;
+       }
+
+       .attempted {
+           background-color: #4CAF50;
+       }
+
+       .unattempted {
+           background-color: #ddd;
+       }
+
+       .legend {
+           margin-top: 10px;
+           text-align: center;
+           font-size: 14px;
+       }
+
+       .legend span {
+           display: inline-block;
+           margin-right: 10px;
+       }
+
+       .legend .attempted {
+           background-color: #4CAF50;
+           width: 20px;
+           height: 20px;
+           border-radius: 50%;
+           margin-right: 5px;
+       }
+
+       .legend .unattempted {
+           background-color: #ddd;
+           width: 20px;
+           height: 20px;
+           border-radius: 50%;
+           margin-right: 5px;
+       }
+
+       .question-nav {
+           display: flex;
+           justify-content: center;
+           margin-top: 20px;
+       }
+
+       .question-nav button {
+           background-color: #008CBA;
+           color: white;
+           border: none;
+           padding: 10px 15px;
+           margin-right: 10px;
+           cursor: pointer;
+           border-radius: 5px;
+           transition: background-color 0.3s ease;
+       }
+
+       .question-nav button.attempted {
+           background-color: #4CAF50;
+       }
+
+       .question-nav button.current {
+           background-color: #45a049;
+       }
+
+       .question-nav button:hover {
+           background-color: #0077A3;
+       }
+   </style>    
+</head>
+
+<body>
+<div id="exam-container">
+    <!--Questions-->
+    <div class="question" id="page1">
+        <p>1. Who is credited with the discovery of the electron?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ1" value="a" id="q1a"><label for="q1a">J.J. Thomson</label></li>
+            <li><input type="radio" name="phyQ1" value="b" id="q1b"><label for="q1b">Niels Bohr</label></li>
+            <li><input type="radio" name="phyQ1" value="c" id="q1c"><label for="q1c">Ernest Rutherford</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page2">
+        <p>2. What is the SI unit of force?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ2" value="a" id="q2a"><label for="q2a">Newton</label></li>
+            <li><input type="radio" name="phyQ2" value="b" id="q2b"><label for="q2b">Joule</label></li>
+            <li><input type="radio" name="phyQ2" value="c" id="q2c"><label for="q2c">Watt</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page3">
+        <p>3. Who formulated the theory of relativity?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ3" value="a" id="q3a"><label for="q3a">Isaac Newton</label></li>
+            <li><input type="radio" name="phyQ3" value="b" id="q3b"><label for="q3b">Albert Einstein</label></li>
+            <li><input type="radio" name="phyQ3" value="c" id="q3c"><label for="q3c">Galileo Galilei</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page4">
+        <p>4. What is the speed of light in a vacuum?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ4" value="a" id="q4a"><label for="q4a">299,792,458 meters per second</label></li>
+            <li><input type="radio" name="phyQ4" value="b" id="q4b"><label for="q4b">300,000,000 meters per second</label></li>
+            <li><input type="radio" name="phyQ4" value="c" id="q4c"><label for="q4c">400,000,000 meters per second</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page5">
+        <p>5. What is the first law of thermodynamics also known as?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ5" value="a" id="q5a"><label for="q5a">Law of Conservation of Energy</label></li>
+            <li><input type="radio" name="phyQ5" value="b" id="q5b"><label for="q5b">Law of Entropy</label></li>
+            <li><input type="radio" name="phyQ5" value="c" id="q5c"><label for="q5c">Boyle's Law</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page6">
+        <p>6. Who proposed the famous equation E=mc^2?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ6" value="a" id="q6a"><label for="q6a">Isaac Newton</label></li>
+            <li><input type="radio" name="phyQ6" value="b" id="q6b"><label for="q6b">Albert Einstein</label></li>
+            <li><input type="radio" name="phyQ6" value="c" id="q6c"><label for="q6c">Niels Bohr</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page7">
+        <p>7. What is the unit of electrical resistance?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ7" value="a" id="q7a"><label for="q7a">Ohm</label></li>
+            <li><input type="radio" name="phyQ7" value="b" id="q7b"><label for="q7b">Ampere</label></li>
+            <li><input type="radio" name="phyQ7" value="c" id="q7c"><label for="q7c">Volt</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page8">
+        <p>8. What is the principle behind a telescope?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ8" value="a" id="q8a"><label for="q8a">Refraction</label></li>
+            <li><input type="radio" name="phyQ8" value="b" id="q8b"><label for="q8b">Diffraction</label></li>
+            <li><input type="radio" name="phyQ8" value="c" id="q8c"><label for="q8c">Reflection</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page9">
+        <p>9. Which scientist is known for the laws of planetary motion?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ9" value="a" id="q9a"><label for="q9a">Galileo Galilei</label></li>
+            <li><input type="radio" name="phyQ9" value="b" id="q9b"><label for="q9b">Johannes Kepler</label></li>
+            <li><input type="radio" name="phyQ9" value="c" id="q9c"><label for="q9c">Isaac Newton</label></li>
+        </ul>
+    </div>
+    
+    <div class="question" id="page10">
+        <p>10. What is the smallest particle of an element that retains its chemical properties?</p>
+        <ul class="options">
+            <li><input type="radio" name="phyQ10" value="a" id="q10a"><label for="q10a">Atom</label></li>
+            <li><input type="radio" name="phyQ10" value="b" id="q10b"><label for="q10b">Molecule</label></li>
+            <li><input type="radio" name="phyQ10" value="c" id="q10c"><label for="q10c">Cell</label></li>
+        </ul>
+    </div>
+    
+    <div class="legend">
+        <span class="attempted"></span> Attempted
+        <span class="unattempted"></span> Not Attempted
+    </div>
+
+    <div class="question-nav" id="question-nav">
+        <!-- Add buttons dynamically based on the number of questions -->
+    </div>
+
+    <div class="page-navigation">
+        <button type="button" onclick="navigate('prev')">Previous</button>
+        <button type="button" onclick="navigate('next')">Next</button>
+        <button type="button" id="review-btn" onclick="reviewAnswers()">Review</button>
+    </div>
+
+    <div id="progress"></div>
+    <div class="progress-bar">
+        <span id="attempted-progress" class="attempted"></span>
+        <span id="unattempted-progress" class="unattempted"></span>
+    </div>
+
+    <div id="timer">Time Left: <span id="countdown">30:00</span></div>
+
+    <button type="button" id="submit-btn" onclick="submitExam()">Submit Exam</button>
+</div>
+
+<script>
+    let currentPage = 1;
+    let timer;
+    let answers = {};
+    let totalQuestions = 10;
+
+    // Function to start the timer automatically
+    function startTimer(durationInSeconds) {
+        let timerDisplay = document.getElementById('countdown');
+        let timerSeconds = durationInSeconds;
+
+        timer = setInterval(function () {
+            let minutes = Math.floor(timerSeconds / 60);
+            let seconds = timerSeconds % 60;
+
+            timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+            if (--timerSeconds < 0) {
+                clearInterval(timer);
+                alert("Time's up! Submit your exam.");
+                submitExam();
+            }
+        }, 1000);
+    }
+
+    // Function to automatically start the exam when the page loads
+    function startExamAutomatically() {
+        showPage(`page${currentPage}`);
+        createQuestionNav();
+        startTimer(1800); // 30 minutes timer
+        updateProgress();
+    }
+
+    // Function to navigate to the specified page
+    function showPage(pageId) {
+        document.querySelectorAll('.question').forEach(question => {
+            question.style.display = 'none';
+        });
+        document.getElementById(pageId).style.display = 'block';
+        updateQuestionNavButtons();
+    }
+
+    // Function to navigate to the previous or next page
+    function navigate(direction) {
+        if (direction === 'prev' && currentPage > 1) {
+            currentPage--;
+        } else if (direction === 'next' && currentPage < totalQuestions) {
+            currentPage++;
+        }
+
+        showPage(`page${currentPage}`);
+        updateProgress();
+    }
+
+    // Function to update the progress display
+    function updateProgress() {
+        let attempted = Object.keys(answers).length;
+        let notAttempted = totalQuestions - attempted;
+
+        document.getElementById('progress').innerHTML = `Question ${currentPage} | Attempted: ${attempted} | Not Attempted: ${notAttempted}`;
+
+        // Update progress bar
+        let percentageAttempted = (attempted / totalQuestions) * 100;
+        let percentageUnattempted = 100 - percentageAttempted;
+
+        document.getElementById('attempted-progress').style.width = `${percentageAttempted}%`;
+        document.getElementById('unattempted-progress').style.width = `${percentageUnattempted}%`;
+
+        updateQuestionNavButtons();
+    }
+
+    // Function to create question navigation buttons dynamically
+    function createQuestionNav() {
+        let questionNav = document.getElementById('question-nav');
+        for (let i = 1; i <= totalQuestions; i++) {
+            let button = document.createElement('button');
+            button.textContent = i;
+            button.addEventListener('click', function () {
+                currentPage = i;
+                showPage(`page${currentPage}`);
+                updateProgress();
+            });
+            questionNav.appendChild(button);
+        }
+    }
+
+    // Function to update question navigation buttons
+    function updateQuestionNavButtons() {
+        let questionNavButtons = document.querySelectorAll('.question-nav button');
+
+        questionNavButtons.forEach((button, index) => {
+            let questionNumber = index + 1;
+            if (answers.hasOwnProperty(`q${questionNumber}`)) {
+                button.classList.add('attempted');
+                button.classList.remove('current');
+            } else {
+                button.classList.remove('attempted');
+                button.classList.remove('current');
+            }
+
+            if (questionNumber === currentPage) {
+                button.classList.add('current');
+            }
+        });
+    }
+
+    // Function to review saved answers
+    function reviewAnswers() {     
+        let reviewMessage = "Reviewing Saved Answers:\n\n";
+        for (let questionNumber = 1; questionNumber <= totalQuestions; questionNumber++) {
+            if (answers.hasOwnProperty(`q${questionNumber}`)) {
+                reviewMessage += `Question ${questionNumber}: ${answers[`q${questionNumber}`]}\n`;
+            } else {
+                reviewMessage += `Question ${questionNumber}: Not Attempted\n`;
+            }
+        }
+        alert(reviewMessage);
+    }
+
+    // Function to submit the exam
+    function submitExam() {
+        clearInterval(timer);     
+        alert("Exam submitted successfully!");
+    }
+
+    // Function to get the selected option for the current question
+    function getSelectedOption() {
+        let selectedOption = document.querySelector(`input[name="q${currentPage}"]:checked`);
+        return selectedOption ? selectedOption.value : null;
+    }
+
+    // Listen for changes in radio button selections and record answers
+    document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.addEventListener('change', function () {
+            recordAnswer(currentPage, getSelectedOption());
+        });
+    });
+
+    // Function to record the selected answer for a question
+    function recordAnswer(questionNumber, answer) {
+        answers[`q${questionNumber}`] = answer;
+        updateProgress();
+    }
+
+    // Automatically start the exam when the page loads
+    startExamAutomatically();
+
+    // JavaScript function to show a confirmation alert on page load
+    window.onload = function() {
+        var confirmation = window.confirm("Are you sure you want to start the exam?");
+        // Check if the user clicked OK (true) or Cancel (false)
+        if (confirmation) {     
+            alert("Exam has started!");
+            // Add your exam start logic here
+        } else {
+        // User clicked Cancel, prevent access to the page
+        alert("Exam start canceled. Access Denied!");
+        window.location.replace("project_test.php"); // Redirect to an access denied page
+        // Alternatively, you can leave the line above blank or display a custom message.
+    }
+}
+</script>
+</body>
+</html>

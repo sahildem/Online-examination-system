@@ -1,0 +1,107 @@
+/* Styling for navigation menu */
+nav {
+  background-color: #333;
+  text-align: left; /* Shift the navigation bar to the left */
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;           /*navigation bar */
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background-color: #555;
+}
+
+nav ul li.current a {
+  background-color: #555;
+}
+
+.logo{
+  text-align: center;
+  color:black;    
+  background-color: skyblue; /*online examination System*/
+
+
+}
+
+.col-lg-6{
+  text-align: center;
+  background-color:skyblue;
+  font-size: 250%;
+}
+.log{
+  text-align:right ;
+  color: red;   
+  background-color:skyblue;          /*signout*/
+}
+.header{
+  text-align:right;
+  
+}
+
+
+
+/* Container styles */
+.container {
+  height: 100%;
+  width:100%;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Table styles */
+.container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  
+}
+
+.container th, .container td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.container th {
+  background-color: #007bff;
+  color: white;
+}
+
+.container tbody tr:hover {
+  background-color: white;
+
+}
+
+
+
+.container tbody td:first-child,
+.container thead th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.container tbody td:last-child,
+.container thead th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+ .col-md-offset-2{
+  background-color: skyblue;
+}
+

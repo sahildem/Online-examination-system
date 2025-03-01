@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Examination System</title>
+<style>
+body {
+ background-color: #f2f2f2;
+ font-family: Arial, sans-serif;
+}
+
+.navbar {
+ background-color: #333;
+ overflow: hidden;
+ border-radius: 10px;
+ margin-bottom: 20px;
+}
+
+.navbar a {
+ float: left;
+ display: block;
+ color: #f2f2f2;
+ text-align: center;
+ padding: 14px 16px;
+ text-decoration: none;
+}
+
+.navbar a:hover {
+ background-color: #ddd;
+ color: black;
+}
+
+.jumbotron {
+ background-color: #F5DEB3;
+ border-radius: 10px;
+ color: black;
+ padding: 30px;
+ text-align: center;
+ margin-bottom: 20px;
+}
+
+.card {
+ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+ transition: 0.3s;
+ width: 20%;
+ margin: 10px;
+ display: inline-block;
+}
+
+.card:hover {
+ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.container {
+ padding: 2px 16px;
+}
+
+.btn {
+ border: none;
+ color: white;
+ padding: 14px 28px;
+ font-size: 16px;
+ cursor: pointer;
+}
+
+.btn:hover {
+ background-color: #333;
+}
+
+.btn-primary {
+ background-color: #333;
+}
+
+.btn-secondary {
+ background-color: #4CAF50;
+ color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+ <a href="project_test.html">Home</a>
+ <a href="menus\courses.html">Courses</a>
+ <a href="menus\instructors.html">Instructors</a>
+ <a href="menus\aboutus.html">About Us</a>
+ <a href="menus\contact.html">Contact</a>
+</div>
+
+<div class="jumbotron">
+ <h1>Welcome <?= htmlspecialchars($user["name"]) ?> to Exam Portal</h1>
+ <p>Get Started</p>
+</div>
+
+<div class="container">
+ <div class="card">
+    <img src="img\literature1.jpg" alt="Course" style="width:290px; height:400px">
+    <div class="container">
+      <h4><b>Literature</b></h4>
+      <p>This exam will typically assesses a student's understanding of literary works, critical analysis skills, and ability to express ideas coherently.</p><br>
+      <a href="courses/literature.html">
+      <button class="btn btn-primary">Take Exam</button>
+      </a>
+      
+    </div>
+ </div>
+
+ <div class="card">
+    <img src="img\it1.jpg" alt="Course" style="width:290px; height:400px">
+    <div class="container">
+      <h4><b>Information Technology</b></h4>
+      <p>This exam will typically assesses a student's knowledge and understanding of hardware, software, networking, databases, security, and broader IT concepts.</p>
+      <a href="d.html">
+      <button class="btn btn-primary">Take Exam</button>
+      </a>
+    </div>
+ </div>
+
+ <div class="card">
+    <img src="img\physics2.jpg" alt="Course" style="width:290px; height:400px">
+    <div class="container">
+      <h4><b>Physics</b></h4>
+      <p>This exam will assesses a student's understanding of fundamental principles, concepts, and applications in the field of physics.</p><br>
+      <a href="courses/physics.html">
+      <button class="btn btn-primary">Take Exam</button>
+      </a>
+    </div>
+ </div>
+ <div class="card">
+    <img src="img\biology3.jpg" alt="Course" style="width:290px; height:400px">
+    <div class="container">
+      <h4><b>Biology</b></h4>
+      <p>This exam will typically assesses a student's understanding of living organisms, from molecular and cellular levels to ecological and evolutionary processes.</p>
+      <a href="courses/biology.html">
+      <button class="btn btn-primary">Take Exam</button>
+      </a>
+    </div>
+ </div>
+</div>
+
+
+</body>
+</html>
